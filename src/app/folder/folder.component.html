@@ -1,0 +1,30 @@
+<!--<ul>-->
+<!--<li class="click-me" (click)="folder.toggle()">-->
+<!--<i class="material-icons">folder</i>-->
+<!--<span>{{folder.folderName}}</span>-->
+<!--&lt;!&ndash; folder has a new ul for more folders or items &ndash;&gt;-->
+<!--<div *ngIf='folder.display'>-->
+<!--<div *ngFor='let folder of folder.folders'>-->
+<!--<app-folder *ngIf='!folder.folders' [folder]='folder'></app-folder>-->
+<!--</div>-->
+<!--<ul *ngIf='folder.links'>-->
+<!--<app-link-item [links]="folder.links"></app-link-item>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</li>-->
+<!--</ul>-->
+
+<ul>
+  <li *ngFor="let folder of folders">
+    <div class="click-me" (click)="folder.toggle()">
+      <i class="material-icons">folder</i>
+      <span>{{folder.folderName}}</span>
+    </div>
+    <div *ngIf="folder.display">
+      <app-folder [folders]="folder.folders"></app-folder>
+      <ul>
+        <app-link-item [links]="folder.links"></app-link-item>
+      </ul>
+    </div>
+  </li>
+</ul>

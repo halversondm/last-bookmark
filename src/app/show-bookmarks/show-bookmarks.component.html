@@ -1,0 +1,14 @@
+<md-card class="card-fill">
+  <md-card-title>Bookmarks</md-card-title>
+  <md-card-content>
+    <!--<div *ngFor="let folder of data">-->
+      <!--<app-folder *ngIf='folder.folderName' [folder]='folder'></app-folder>-->
+    <!--</div>-->
+    <!--<ul>-->
+      <!--<div *ngFor="let folder of data">-->
+        <!--<app-link-item *ngIf='!folder.folderName' [links]='folder.links' ></app-link-item>-->
+      <!--</div>-->
+    <!--</ul>-->
+    <app-folder [folders]='folders'></app-folder>
+  </md-card-content>
+</md-card>

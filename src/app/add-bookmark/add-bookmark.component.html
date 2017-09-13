@@ -1,0 +1,19 @@
+<h2 md-dialog-title>Add new bookmark</h2>
+<md-dialog-content>
+  <form class="new-bookmark-form">
+    <md-form-field class="new-bookmark-field">
+      <input mdInput placeholder="Bookmark" [(ngModel)]="link" name="link"/>
+    </md-form-field>
+    <md-form-field class="new-bookmark-field">
+      <input mdInput placeholder="Bookmark Name" [(ngModel)]="linkName" name="linkName"/>
+    </md-form-field>
+    <md-form-field class="new-bookmark-field">
+      <input mdInput placeholder="Folder" [(ngModel)]="folderName" name="folder"/>
+    </md-form-field>
+  </form>
+  <span class="mat-body">{{message}}</span>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="add()">Add</button>
+  <button md-button (click)="cancel()">Cancel</button>
+</md-dialog-actions>
