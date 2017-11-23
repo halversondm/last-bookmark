@@ -15,7 +15,7 @@ export class ShowBookmarksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.folders = this._bookmarkService.getBookmarks();
+    this._bookmarkService.getBookmarks().subscribe((folders) => this.folders = folders);
   }
 
 }

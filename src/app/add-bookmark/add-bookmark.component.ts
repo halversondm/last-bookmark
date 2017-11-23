@@ -13,8 +13,9 @@ export class AddBookmarkComponent implements OnInit {
   linkName: string;
   folderName: string;
   message: string;
+  //public dialogRef: MdDialogRef<AddBookmarkComponent>,
 
-  constructor(public dialogRef: MdDialogRef<AddBookmarkComponent>, private _bookmarkService: BookmarkService) {
+  constructor(private _bookmarkService: BookmarkService) {
   }
 
   ngOnInit() {
@@ -22,15 +23,14 @@ export class AddBookmarkComponent implements OnInit {
   }
 
   cancel(): void {
-    this.dialogRef.close();
+    //this.dialogRef.close();
   }
 
   add(): void {
-    console.log(`folderName ${this.folderName}, linkName ${this.linkName}, link ${this.link}`);
     if (this.link !== undefined && this.linkName !== undefined) {
       this._bookmarkService.addBookmark(this.folderName, this.linkName, this.link);
       this.message = "Added!";
-      this.dialogRef.close();
+      //this.dialogRef.close();
     } else {
       this.message = "You have to provide a Bookmark and Bookmark Name";
     }

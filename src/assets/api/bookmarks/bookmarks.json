@@ -1,0 +1,51 @@
+[
+  {
+    "folderName": "Favorites",
+    "folders": null,
+    "links": [
+      {
+        "linkName": "Google",
+        "link": "https://google.com"
+      },
+      {
+        "linkName": "FaceBook",
+        "link": "https://facebook.com"
+      }
+    ]
+  },
+  {
+    "folderName": "Top Level",
+    "folders": [
+      {
+        "folderName": "Next Level",
+        "folders": null,
+        "links": [
+          {
+            "linkName": "halversondm",
+            "link": "https://halversondm.com"
+          }
+        ]
+      },
+      {
+        "folderName": "Next Next Level",
+        "folders": null,
+        "links": [
+          {
+            "linkName": "The Burritt Cup",
+            "link": "https://theburrittcup.com"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "folderName": "",
+    "folders": null,
+    "links": [
+      {
+        "linkName": "Google News",
+        "link": "https://news.google.com"
+      }
+    ]
+  }
+]

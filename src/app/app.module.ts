@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { HttpModule} from "@angular/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule, MdButtonModule, MdDialogModule, MdInputModule, MdCardModule } from '@angular/material';
+import { MdToolbarModule, MdButtonModule, MdDialogModule, MdInputModule, MdCardModule, MdExpansionModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
@@ -30,6 +31,8 @@ import {BookmarkService} from "./common/BookmarkService";
     MdDialogModule,
     MdInputModule,
     MdCardModule,
+    MdExpansionModule,
+    HttpModule,
   ],
   entryComponents: [
     AddBookmarkComponent
