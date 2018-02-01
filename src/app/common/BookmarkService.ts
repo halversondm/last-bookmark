@@ -20,16 +20,7 @@ export class BookmarkService {
   getBookmarks(): Observable<Folder[]> {
     return this._http.get(this._getBookmarksUrl)
       .map(this.convertToFolder)
-      .do(this.recursiveConvert)
       .catch(this.handleError);
-  }
-
-  recursiveConvert(folders: Folder[]): Folder[] {
-    for (let i = 0; i < folders.length; i += 1) {
-      let folder = folders[i];
-      folders[i] = new Folder(folder.folderName, folder.folders, folder.links);
-    }
-    return folders;
   }
 
   handleError(error: Response) {
