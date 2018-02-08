@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response} from '@angular/http';
+import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
 import {Folder} from "./Folder";
 import {ILink} from "./ILink";
 import {Observable} from "rxjs/Observable";
@@ -30,13 +30,18 @@ export class BookmarkService {
 
   convertToFolder(response: Response) {
     let folders = <Folder[]>response.json();
-    console.log('All : ',folders);
+    console.log('All : ', folders);
     this.folders = folders;
     return folders;
   }
 
   addBookmark(folderName: string, linkName: string, link: string) {
     // console.log(`folderName ${folderName}, linkName ${linkName}, link ${link}`);
+
+    if (this.folders.length === 0 ) {
+      this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+      return;
+    }
 
     for (let i = 0; i < this.folders.length; i += 1) {
       let folder = this.folders[i];
@@ -49,6 +54,18 @@ export class BookmarkService {
         }
       }
     }
+  }
+
+  saveBookmarks() {
+    const headers: Headers = new Headers();
+    headers.set("Content-Type", "application/json");
+    const httpHeaders: RequestOptionsArgs =
+      {
+        headers: headers
+      };
+    let save = this._http.post("/api/saveBookmarks", this.folders, httpHeaders)
+      .catch(this.handleError);
+    save.subscribe();
   }
 
   findFolder(folderName: string, linkName: string, link: string, folder: Folder): boolean {
@@ -71,12 +88,13 @@ export class BookmarkService {
     }
   }
 
-  updateLinks(linkName: string, link: string, folder: Folder) {
+  updateLinks(linkName: string, link: string, folder: Folder): Folder {
     let aLink: ILink = {linkName: linkName, link: link};
     if (folder.links === undefined) {
       folder.links = [];
     }
     folder.links.push(aLink);
+    return folder;
   }
 
 }

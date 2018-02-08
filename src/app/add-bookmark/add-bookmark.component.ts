@@ -29,6 +29,7 @@ export class AddBookmarkComponent implements OnInit {
   add(): void {
     if (this.link !== undefined && this.linkName !== undefined) {
       this._bookmarkService.addBookmark(this.folderName, this.linkName, this.link);
+      this._bookmarkService.saveBookmarks();
       this.message = "Added!";
       //this.dialogRef.close();
     } else {

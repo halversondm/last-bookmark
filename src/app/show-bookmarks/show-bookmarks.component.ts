@@ -15,8 +15,10 @@ export class ShowBookmarksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._bookmarkService.getBookmarks().subscribe((folders) => this.folders = this.recursiveConvert(folders));
-    this._bookmarkService.folders = this.folders;
+    this._bookmarkService.getBookmarks().subscribe((folders) => {
+      this.folders = this.recursiveConvert(folders);
+      this._bookmarkService.folders = this.folders;
+    });
   }
 
   recursiveConvert(folders: Folder[]): Folder[] {
