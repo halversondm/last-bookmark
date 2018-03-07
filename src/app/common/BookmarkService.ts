@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
-import {Folder} from "./Folder";
-import {ILink} from "./ILink";
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptionsArgs, Response } from '@angular/http';
+import { Folder } from './Folder';
+import { ILink } from './ILink';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class BookmarkService {
 
-  private _getBookmarksUrl = "/assets/api/bookmarks/bookmarks.json";
+  private _getBookmarksUrl = '/assets/api/bookmarks/bookmarks.json';
 
   folders: Folder[];
 
@@ -29,7 +29,7 @@ export class BookmarkService {
   }
 
   convertToFolder(response: Response) {
-    let folders = <Folder[]>response.json();
+    const folders = <Folder[]>response.json();
     console.log('All : ', folders);
     this.folders = folders;
     return folders;
@@ -38,13 +38,15 @@ export class BookmarkService {
   addBookmark(folderName: string, linkName: string, link: string) {
     // console.log(`folderName ${folderName}, linkName ${linkName}, link ${link}`);
 
-    if (this.folders.length === 0 ) {
-      this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+    // no folders, just add the first one to the folders object
+    if (this.folders.length === 0) {
+      this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
       return;
     }
 
+    // process through the high level folders, if one matches add it.
     for (let i = 0; i < this.folders.length; i += 1) {
-      let folder = this.folders[i];
+      const folder = this.folders[i];
       if ((folder.folderName === undefined || folder.folderName === null) && folderName === undefined) {
         this.updateLinks(linkName, link, folder);
         return;
@@ -54,16 +56,19 @@ export class BookmarkService {
         }
       }
     }
+
+    // add a new folder where the folder object already has high level entries
+    this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
+
   }
 
   saveBookmarks() {
     const headers: Headers = new Headers();
-    headers.set("Content-Type", "application/json");
-    const httpHeaders: RequestOptionsArgs =
-      {
+    headers.set('Content-Type', 'application/json');
+    const httpHeaders: RequestOptionsArgs = {
         headers: headers
-      };
-    let save = this._http.post("/api/saveBookmarks", this.folders, httpHeaders)
+    };
+    const save = this._http.post('/api/saveBookmarks', this.folders, httpHeaders)
       .catch(this.handleError);
     save.subscribe();
   }
@@ -75,8 +80,8 @@ export class BookmarkService {
     } else {
       if (folder.folders !== undefined && folder.folders !== null) {
         for (let i = 0; i < folder.folders.length; i += 1) {
-          let currentChild = folder.folders[i];
-          let result = this.findFolder(folderName, linkName, link, currentChild);
+          const currentChild = folder.folders[i];
+          const result = this.findFolder(folderName, linkName, link, currentChild);
           if (result) {
             return result;
           }
@@ -89,7 +94,7 @@ export class BookmarkService {
   }
 
   updateLinks(linkName: string, link: string, folder: Folder): Folder {
-    let aLink: ILink = {linkName: linkName, link: link};
+    const aLink: ILink = { linkName: linkName, link: link };
     if (folder.links === undefined) {
       folder.links = [];
     }

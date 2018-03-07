@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { HttpModule} from "@angular/http";
+import { HttpModule} from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule, MdButtonModule, MdDialogModule, MdInputModule, MdCardModule, MdExpansionModule } from '@angular/material';
 
@@ -11,7 +11,7 @@ import { ShowBookmarksComponent } from './show-bookmarks/show-bookmarks.componen
 import { FolderComponent } from './folder/folder.component';
 import { LinkItemComponent } from './link-item/link-item.component';
 import { HeaderComponent } from './header/header.component';
-import {BookmarkService} from "./common/BookmarkService";
+import {BookmarkService} from './common/BookmarkService';
 
 @NgModule({
   declarations: [

@@ -23,7 +23,7 @@ app.get("*", (req, res) => {
 app.post("/api/saveBookmarks", (req, res) => {
   // Assume that a save is full file save
   let bookmarks = req.body;
-  let date = new Date().getMilliseconds();
+  let date = new Date().getTime();
   fs.renameSync("./assets/api/bookmarks/bookmarks.json", `./assets/api/bookmarks/bookmarks-${date}.json`);
   fs.writeFileSync("./assets/api/bookmarks/bookmarks.json", JSON.stringify(bookmarks));
   res.send();

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from "@angular/material";
-import {AddBookmarkComponent} from "../add-bookmark/add-bookmark.component";
+import {MdDialog} from '@angular/material';
+import {AddBookmarkComponent} from '../add-bookmark/add-bookmark.component';
 
 @Component({
   selector: 'app-header',

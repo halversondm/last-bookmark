@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Folder} from "../common/Folder";
-import {BookmarkService} from "../common/BookmarkService";
+import {Folder} from '../common/Folder';
+import {BookmarkService} from '../common/BookmarkService';
 
 @Component({
   selector: 'app-show-bookmarks',
@@ -26,7 +26,7 @@ export class ShowBookmarksComponent implements OnInit {
       return null;
     }
     for (let i = 0; i < folders.length; i += 1) {
-      let folder = folders[i];
+      const folder = folders[i];
       folders[i] = new Folder(folder.folderName, this.recursiveConvert(folder.folders), folder.links);
     }
     return folders;

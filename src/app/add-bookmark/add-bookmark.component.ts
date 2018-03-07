@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
-import {BookmarkService} from "../common/BookmarkService";
+import {BookmarkService} from '../common/BookmarkService';
 
 @Component({
   selector: 'app-add-bookmark',
@@ -13,27 +13,26 @@ export class AddBookmarkComponent implements OnInit {
   linkName: string;
   folderName: string;
   message: string;
-  //public dialogRef: MdDialogRef<AddBookmarkComponent>,
 
-  constructor(private _bookmarkService: BookmarkService) {
+  constructor(private _bookmarkService: BookmarkService, public dialogRef: MdDialogRef<AddBookmarkComponent>) {
   }
 
   ngOnInit() {
 
   }
 
-  cancel(): void {
-    //this.dialogRef.close();
+  close(): void {
+    this.dialogRef.close();
   }
 
   add(): void {
     if (this.link !== undefined && this.linkName !== undefined) {
       this._bookmarkService.addBookmark(this.folderName, this.linkName, this.link);
       this._bookmarkService.saveBookmarks();
-      this.message = "Added!";
-      //this.dialogRef.close();
+      this.message = 'Added!';
+      setTimeout(() => this.message = '', 1000);
     } else {
-      this.message = "You have to provide a Bookmark and Bookmark Name";
+      this.message = 'You have to provide a URL and a Name';
     }
   }
 
