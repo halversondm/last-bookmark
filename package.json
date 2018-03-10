@@ -1,7 +1,13 @@
 {
   "name": "last-bookmark",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Dan Halverson",
   "license": "MIT",
+  "description": "The Last Bookmark",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/halversondm/last-bookmark.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
@@ -10,7 +16,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "4.3.6",
     "@angular/cdk": "2.0.0-beta.10",

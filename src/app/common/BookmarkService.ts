@@ -30,7 +30,7 @@ export class BookmarkService {
 
   convertToFolder(response: Response) {
     const folders = <Folder[]>response.json();
-    console.log('All : ', folders);
+    // console.log('All : ', folders);
     this.folders = folders;
     return folders;
   }

@@ -15,8 +15,8 @@
   "author": "Dan Halverson",
   "license": "MIT",
   "homepage": "https://github.com/halversondm/last-bookmark.git",
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node server"
+  "bin": {
+    "last-bookmark": "server.js"
   },
   "dependencies": {
     "cross-env": "5.0.1",

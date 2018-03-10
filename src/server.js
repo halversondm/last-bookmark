@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
  Main server configuration using NodeJS and ExpressJS
  */
