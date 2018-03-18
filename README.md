@@ -1,5 +1,7 @@
 # LastBookmark
 
+[![Build Status](https://travis-ci.org/halversondm/last-bookmark.svg?branch=master)](https://travis-ci.org/halversondm/last-bookmark)
+
 ## Description
 This is the last bookmark that you will ever need.  This project allows you to track your bookmarks in an application that is decoupled from any browser.  Host it on your local machine and used it with any modern browser.  Your bookmarks are backed up to your a remote git repository of your choice.
 
