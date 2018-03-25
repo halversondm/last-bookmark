@@ -5,19 +5,14 @@ before_install:
   - npm i -g @angular/cli@1.6.3
 script:
   - ng build --prod
-jobs:
-  include:
-    - stage: npm release
-      if: tag IS present
-      node_js: "8"
-      before_deploy:
-        - cd dist
-      deploy:
-        provider: npm
-        email: "$NPM_EMAIL"
-        api_key: "$NPM_AUTH_TOKEN"
-        skip_cleanup: true
-        on:
-          tags: true
- notifications:
-    slack: $SLACK_TOKEN
+before_deploy:
+  - cd dist
+deploy:
+  provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_AUTH_TOKEN"
+  skip_cleanup: true
+  on:
+     tags: true
+notifications:
+  slack: $SLACK_TOKEN
