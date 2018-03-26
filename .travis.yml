@@ -1,20 +1,19 @@
 language: node_js
 node_js:
-  - "7"
+- '7'
 before_install:
-  - npm i -g @angular/cli@1.6.3
+- npm i -g @angular/cli@1.6.3
 script:
-  - ng build --prod
+- ng build --prod
 before_deploy:
-  - cd dist
+- cd dist
 deploy:
   provider: npm
   email: "$NPM_EMAIL"
   api_key: "$NPM_AUTH_TOKEN"
   skip_cleanup: true
   on:
-     tags: true
+    tags: true
 notifications:
   slack:
-    secure: ST/Z4BtREzWL8DOI22v92pNb+oNmfDwTPH4uz2tHFE+/rreFTstVjIysJpEwrQAqyuIA2V3Rhzx0qYItyauT8KVSYHsbY4GIgABja8tWC1hT31pNoOYBXcfKfi9Vcn0QNJDkQPNSGLmpG8HTDPjK7qqkwPA6zjc1fnzi9F2758JUSX8gPcU8GPEqKwjiP3haKA5jiyt1bJ/n0/ub9Wic8hE2gSsRZzJCeA8f915RVXh0xHdL8/z6W0Ng9vwu1KUrWxOe2c6gelZnJTUypHI0/PPy9tZtowd/5xLwJL64iohM7UH+sVIK7fTa8a7noqnduxkRdji01vYDP6J+0VluJQ3b4VmaaGeRQwpsIBs9iN4NcgmvBFrE3MH5PRFXdLOHATCy8EoZeKBdv1BWec2Koaq2bVkj7oYqMGfcLnoi2NFOoSL2T1mGrJIpjbjFX/PIMQ8oyWSah0H/0KTK7kPbXZFiEYqP/kG93enljwzPlNhdC2xWKOsVGur9oCfr5YIN8w8Jgehkk+hfN3BezOyec+UfBxfu6wtDO+P7/vCW5mrJnbmlznuZRwTltJmJiQTFUt2Oagvr5Xtm9E6y1ige+FInklI11Ka8p8yo7A9q+bLy5O0WgJP/tsGgAGCDt7DHDjVldWuBdVwc4HoaZgBHl3r9wsMdZh+EmxA69XA38hg=
-
+    secure: i8305/Rnte67v7/p5C4EDPJuV7wm+ZrkONCXfUuX66urftNNV+Qch3m0NFxFTNIyAH64tHukHVb5+qxAXw7rjr29QGBw7+XQoOcaY9g0iFEzJ6gyA6rdRmyrGyiMpIfBsxZK4PNCTDIPApKHIP+ZxPq4E9wsSm35nNz+eID+WqlGv90bImcv504FecGeDmQMIfphIL9X/N9Q3t1dGAXbtrWLazowd266B0kDP6H34gSWqDDejlaWL6JQiHHG1MDlBFXlTMJaplmLlf311rzOzVESYE23MRm41OuByjL7ETG3kgMa+u6wsBRyjXxOTwzVb29HhKS6f0x6Dmrd1YQNIUE2giH9baERIsXWL2mP97sQifN1FBvsFvl6g8+xYduvkJVHhu8GYkiIy+8yg2DFKMZp0CxZvu8tSlqqK/beQoYBfr1uHI1deJo3JyBQtUEe+buP9/Iu0D8zOxmysnXHeDt089I7ijPpgwaMFrcXXiclkQShIRuzsOFTGM9o+241r33ZCH6zySVSnMYF9c9mdu6dFmFLiWCHE3QhqTsVOQ2bXSvmqRxGA0Ce8W/VTx0MVyrqIQQErUx4KpLmqLI3qTLBrhTccc/Lgdbpz6bc//44Us4vEFn7whgCr6iQtn/WoqL3bvsxTANIlHqKTodLykWpH/QHjAudV6hAgDstrZ4=
