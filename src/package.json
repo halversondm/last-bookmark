@@ -1,6 +1,6 @@
 {
   "name": "last-bookmark",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Last Bookmark",
   "main": "server.js",
   "repository": {
@@ -19,7 +19,7 @@
     "last-bookmark": "server.js"
   },
   "scripts": {
-    "postinstall": "cd ./assets && git init && git add --all ./ && git commit -am 'initial commit'"
+    "postinstall": "cd ./assets && git init && git add --all ./ && git commit -am \"initial commit\""
   },
   "dependencies": {
     "cross-env": "5.0.1",
