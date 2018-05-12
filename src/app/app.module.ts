@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule} from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule, MdButtonModule, MdDialogModule, MdInputModule, MdCardModule, MdExpansionModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatDialogModule, MatInputModule, MatCardModule, MatExpansionModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
@@ -26,12 +26,12 @@ import {BookmarkService} from './common/BookmarkService';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MdToolbarModule,
-    MdButtonModule,
-    MdDialogModule,
-    MdInputModule,
-    MdCardModule,
-    MdExpansionModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatCardModule,
+    MatExpansionModule,
     HttpModule,
   ],
   entryComponents: [

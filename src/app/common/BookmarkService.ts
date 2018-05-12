@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptionsArgs, Response } from '@angular/http';
-import { Folder } from './Folder';
-import { ILink } from './ILink';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
+import {Injectable} from '@angular/core';
+import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
+import {Folder} from './Folder';
+import {ILink} from './ILink';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class BookmarkService {
@@ -19,13 +17,9 @@ export class BookmarkService {
 
   getBookmarks(): Observable<Folder[]> {
     return this._http.get(this._getBookmarksUrl)
-      .map(this.convertToFolder)
-      .catch(this.handleError);
-  }
-
-  handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+      .pipe(
+        map(this.convertToFolder)
+      );
   }
 
   convertToFolder(response: Response) {
@@ -40,7 +34,7 @@ export class BookmarkService {
 
     // no folders, just add the first one to the folders object
     if (this.folders.length === 0) {
-      this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
+      this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
       return;
     }
 
@@ -58,7 +52,7 @@ export class BookmarkService {
     }
 
     // add a new folder where the folder object already has high level entries
-    this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
+    this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
 
   }
 
@@ -66,10 +60,9 @@ export class BookmarkService {
     const headers: Headers = new Headers();
     headers.set('Content-Type', 'application/json');
     const httpHeaders: RequestOptionsArgs = {
-        headers: headers
+      headers: headers
     };
-    const save = this._http.post('/api/saveBookmarks', this.folders, httpHeaders)
-      .catch(this.handleError);
+    const save = this._http.post('/api/saveBookmarks', this.folders, httpHeaders);
     save.subscribe();
   }
 
@@ -94,7 +87,7 @@ export class BookmarkService {
   }
 
   updateLinks(linkName: string, link: string, folder: Folder): Folder {
-    const aLink: ILink = { linkName: linkName, link: link };
+    const aLink: ILink = {linkName: linkName, link: link};
     if (folder.links === undefined) {
       folder.links = [];
     }

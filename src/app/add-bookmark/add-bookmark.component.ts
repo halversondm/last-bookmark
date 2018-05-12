@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {BookmarkService} from '../common/BookmarkService';
 
 @Component({
@@ -14,7 +14,7 @@ export class AddBookmarkComponent implements OnInit {
   folderName: string;
   message: string;
 
-  constructor(private _bookmarkService: BookmarkService, public dialogRef: MdDialogRef<AddBookmarkComponent>) {
+  constructor(private _bookmarkService: BookmarkService, public dialogRef: MatDialogRef<AddBookmarkComponent>) {
   }
 
   ngOnInit() {

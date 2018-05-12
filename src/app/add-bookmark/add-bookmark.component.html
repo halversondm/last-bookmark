@@ -1,19 +1,19 @@
-<h2 md-dialog-title>Add new bookmark</h2>
-<md-dialog-content>
+<h2 mat-dialog-title>Add new bookmark</h2>
+<mat-dialog-content>
   <form class="new-bookmark-form">
-    <md-form-field class="new-bookmark-field">
-      <input mdInput placeholder="URL" [(ngModel)]="link" name="link"/>
-    </md-form-field>
-    <md-form-field class="new-bookmark-field">
-      <input mdInput placeholder="Name" [(ngModel)]="linkName" name="linkName"/>
-    </md-form-field>
-    <md-form-field class="new-bookmark-field">
-      <input mdInput placeholder="Folder" [(ngModel)]="folderName" name="folder"/>
-    </md-form-field>
+    <mat-form-field class="new-bookmark-field">
+      <input matInput placeholder="URL" [(ngModel)]="link" name="link"/>
+    </mat-form-field>
+    <mat-form-field class="new-bookmark-field">
+      <input matInput placeholder="Name" [(ngModel)]="linkName" name="linkName"/>
+    </mat-form-field>
+    <mat-form-field class="new-bookmark-field">
+      <input matInput placeholder="Folder" [(ngModel)]="folderName" name="folder"/>
+    </mat-form-field>
   </form>
   <span class="mat-body">{{message}}</span>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button (click)="add()">Add</button>
-  <button md-button (click)="close()">Close</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="add()">Add</button>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

@@ -1,6 +1,8 @@
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>LastBookmark</span>
   <span class="toolbar-fill"></span>
-  <button md-fab color="accent" (click)="openDialog()" title="Add new bookmark"><i class="material-icons">input</i>
+  <button mat-fab color="accent" (click)="openFolderDialog()" title="Add new folder"><i class="material-icons">folder</i>
   </button>
-</md-toolbar>
+  <button mat-fab color="accent" (click)="openBookmarkDialog()" title="Add new bookmark"><i class="material-icons">link</i>
+  </button>
+</mat-toolbar>

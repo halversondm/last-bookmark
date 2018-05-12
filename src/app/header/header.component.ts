@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {AddBookmarkComponent} from '../add-bookmark/add-bookmark.component';
 
 @Component({
@@ -12,14 +12,18 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(public dialog: MdDialog) {
+  constructor(public dialog: MatDialog) {
   }
 
-  openDialog() {
+  openBookmarkDialog() {
     this.dialog.open(AddBookmarkComponent, {
       height: '350px',
       width: '500px'
     });
+  }
+
+  openFolderDialog() {
+
   }
 
 }
