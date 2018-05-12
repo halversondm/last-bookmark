@@ -12,6 +12,7 @@ import { FolderComponent } from './folder/folder.component';
 import { LinkItemComponent } from './link-item/link-item.component';
 import { HeaderComponent } from './header/header.component';
 import {BookmarkService} from './common/BookmarkService';
+import { AddFolderComponent } from './add-folder/add-folder.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {BookmarkService} from './common/BookmarkService';
     ShowBookmarksComponent,
     FolderComponent,
     LinkItemComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddFolderComponent
   ],
   imports: [
     BrowserModule,
