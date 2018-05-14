@@ -1,3 +1,13 @@
-<p>
-  add-folder works!
-</p>
+<h2 mat-dialog-title>Add folder</h2>
+<mat-dialog-content>
+  <form class="new-folder-form">
+    <mat-form-field class="new-folder-field">
+      <input matInput placeholder="Folder" [(ngModel)]="folderName" name="folder"/>
+    </mat-form-field>
+  </form>
+  <span class="mat-body">{{message}}</span>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button (click)="add($event)">Add</button>
+  <button type="button" mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

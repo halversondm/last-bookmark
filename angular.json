@@ -51,7 +51,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "last-bookmark:build"
+            "browserTarget": "last-bookmark:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

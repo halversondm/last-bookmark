@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Folder} from './Folder';
 import {ILink} from './ILink';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
+import {of} from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class BookmarkService {
@@ -12,29 +13,36 @@ export class BookmarkService {
 
   folders: Folder[];
 
-  constructor(private _http: Http) {
+  constructor(private _http: HttpClient) {
   }
 
   getBookmarks(): Observable<Folder[]> {
     return this._http.get(this._getBookmarksUrl)
       .pipe(
-        map(this.convertToFolder)
+        map(this.convertToFolder),
+        catchError(this.handleError('getBookmarks', []))
       );
   }
 
-  convertToFolder(response: Response) {
-    const folders = <Folder[]>response.json();
-    // console.log('All : ', folders);
+  convertToFolder(response) {
+    console.log(response);
+    const folders = response;
     this.folders = folders;
     return folders;
   }
 
-  addBookmark(folderName: string, linkName: string, link: string) {
-    // console.log(`folderName ${folderName}, linkName ${linkName}, link ${link}`);
+  addFolder(folderName: string) {
+    this.addBookmark(folderName, null, null);
+  }
 
+  addBookmark(folderName: string, linkName: string, link: string) {
     // no folders, just add the first one to the folders object
     if (this.folders.length === 0) {
-      this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+      if (linkName === null && link === null) {
+        this.folders.push(new Folder(folderName, null, null));
+      } else {
+        this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+      }
       return;
     }
 
@@ -57,13 +65,27 @@ export class BookmarkService {
   }
 
   saveBookmarks() {
-    const headers: Headers = new Headers();
-    headers.set('Content-Type', 'application/json');
-    const httpHeaders: RequestOptionsArgs = {
-      headers: headers
-    };
-    const save = this._http.post('/api/saveBookmarks', this.folders, httpHeaders);
+    const request = new HttpRequest('PUT', '/api/saveBookmarks', this.folders, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      reportProgress: true
+    });
+    const save = this._http.request<Folder[]>(request)
+      .pipe(
+        catchError(this.handleError('saveBookmarks', [])),
+        tap(event => console.log(event))
+      );
     save.subscribe();
+  }
+
+  updateLinks(linkName: string, link: string, folder: Folder): Folder {
+    if (folder.links === undefined || folder.links === null) {
+      folder.links = [];
+    }
+    if (linkName !== null && link !== null) {
+      const aLink: ILink = {linkName: linkName, link: link};
+      folder.links.push(aLink);
+    }
+    return folder;
   }
 
   findFolder(folderName: string, linkName: string, link: string, folder: Folder): boolean {
@@ -86,13 +108,17 @@ export class BookmarkService {
     }
   }
 
-  updateLinks(linkName: string, link: string, folder: Folder): Folder {
-    const aLink: ILink = {linkName: linkName, link: link};
-    if (folder.links === undefined) {
-      folder.links = [];
-    }
-    folder.links.push(aLink);
-    return folder;
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 
 }
