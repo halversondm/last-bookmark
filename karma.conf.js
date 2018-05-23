@@ -31,6 +31,7 @@ module.exports = function (config) {
       ChromeHeadless: {
         base: 'Chrome',
         flags: [
+          '--no-sandbox',
           '--headless',
           '--disable-gpu',
           // Without a remote debugging port, Google Chrome exits immediately.

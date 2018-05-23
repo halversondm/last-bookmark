@@ -5,7 +5,7 @@ language: node_js
 node_js:
 - '8'
 before_install:
-- npm i -g @angular/cli@1.6.3
+- npm i -g @angular/cli@6.0.1
 script:
   - npm test
   - npm run build
