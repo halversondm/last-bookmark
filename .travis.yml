@@ -1,10 +1,14 @@
+dist: trusty
+addons:
+  chrome: stable
 language: node_js
 node_js:
 - '8'
 before_install:
 - npm i -g @angular/cli@1.6.3
 script:
-- ng build --prod
+  - npm test
+  - npm run build
 before_deploy:
 - cd dist
 deploy:
