@@ -2,7 +2,10 @@
 <mat-dialog-content>
   <form class="new-folder-form">
     <mat-form-field class="new-folder-field">
-      <input matInput placeholder="Folder" [(ngModel)]="folderName" name="folder"/>
+      <input matInput placeholder="New Folder" [(ngModel)]="folderName" name="new folder"/>
+    </mat-form-field>
+    <mat-form-field class="new-folder-field">
+      <input matInput placeholder="Folder to Add to" [(ngModel)]="existingFolder" name="existing folder"/>
     </mat-form-field>
   </form>
   <span class="mat-body">{{message}}</span>

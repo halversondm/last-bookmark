@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   openFolderDialog() {
     this.dialog.open(AddFolderComponent, {
-      height: '250px',
+      height: '300px',
       width: '500px'
     });
   }

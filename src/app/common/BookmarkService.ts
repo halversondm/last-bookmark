@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
-import {Folder} from './Folder';
-import {ILink} from './ILink';
-import {Observable} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
-import {of} from 'rxjs/internal/observable/of';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { Folder } from './Folder';
+import { ILink } from './ILink';
+import { Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class BookmarkService {
@@ -31,8 +31,33 @@ export class BookmarkService {
     return folders;
   }
 
-  addFolder(folderName: string) {
-    this.addBookmark(folderName, null, null);
+  addFolder(folderName: string, existingFolder: string) {
+    // no folders, just add the first one to the folders object
+    if (this.folders.length === 0) {
+      if (existingFolder === undefined) {
+        this.folders.push(new Folder(folderName, null, null));
+      } else {
+        this.folders.push(new Folder(existingFolder, [new Folder(folderName, null, null)], null));
+      }
+      return;
+    }
+
+    // process through the high level folders, if one matches add it.
+    if (existingFolder !== undefined && existingFolder !== '') {
+      for (let i = 0; i < this.folders.length; i += 1) {
+        const folder = this.folders[i];
+        const foundFolder: Folder = this.findFolder(existingFolder, null, null, folder);
+        if (foundFolder !== null) {
+          foundFolder.folders.push(new Folder(folderName, null, null));
+          return;
+        }
+      }
+      return;
+    }
+
+    // add a new folder where the folder object already has high level entries
+    this.folders.push(new Folder(folderName, null, null));
+
   }
 
   addBookmark(folderName: string, linkName: string, link: string) {
@@ -41,7 +66,7 @@ export class BookmarkService {
       if (linkName === null && link === null) {
         this.folders.push(new Folder(folderName, null, null));
       } else {
-        this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+        this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
       }
       return;
     }
@@ -53,20 +78,22 @@ export class BookmarkService {
         this.updateLinks(linkName, link, folder);
         return;
       } else {
-        if (this.findFolder(folderName, linkName, link, folder)) {
+        const foundFolder: Folder = this.findFolder(folderName, linkName, link, folder);
+        if (foundFolder !== null) {
+          this.updateLinks(linkName, link, foundFolder);
           return;
         }
       }
     }
 
     // add a new folder where the folder object already has high level entries
-    this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+    this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
 
   }
 
   saveBookmarks() {
     const request = new HttpRequest('PUT', '/api/saveBookmarks', this.folders, {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       reportProgress: true
     });
     const save = this._http.request<Folder[]>(request)
@@ -78,32 +105,28 @@ export class BookmarkService {
   }
 
   updateLinks(linkName: string, link: string, folder: Folder): Folder {
-    if (folder.links === undefined || folder.links === null) {
-      folder.links = [];
-    }
     if (linkName !== null && link !== null) {
-      const aLink: ILink = {linkName: linkName, link: link};
+      const aLink: ILink = { linkName: linkName, link: link };
       folder.links.push(aLink);
     }
     return folder;
   }
 
-  findFolder(folderName: string, linkName: string, link: string, folder: Folder): boolean {
+  findFolder(folderName: string, linkName: string, link: string, folder: Folder): Folder {
     if (folder.folderName === folderName) {
-      this.updateLinks(linkName, link, folder);
-      return true;
+      return folder;
     } else {
-      if (folder.folders !== undefined && folder.folders !== null) {
+      if (folder.folders.length > 0) {
         for (let i = 0; i < folder.folders.length; i += 1) {
           const currentChild = folder.folders[i];
           const result = this.findFolder(folderName, linkName, link, currentChild);
-          if (result) {
+          if (result !== null) {
             return result;
           }
         }
-        return false;
+        return null;
       } else {
-        return false;
+        return null;
       }
     }
   }
