@@ -12,6 +12,7 @@ export class LinkItemComponent implements OnInit {
   }
 
   @Input() links: ILink[];
+  @Input() isList: boolean;
 
   ngOnInit() {
   }

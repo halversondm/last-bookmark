@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Folder } from './Folder';
-import { ILink } from './ILink';
-import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {Folder} from './Folder';
+import {ILink} from './ILink';
+import {Observable} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {of} from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class BookmarkService {
 
-  private _getBookmarksUrl = '/assets/api/bookmarks/bookmarks.json';
-
-  folders: Folder[];
+  folders: Folder[] = [];
+  private _getBookmarksUrl = '/api/getBookmarks';
 
   constructor(private _http: HttpClient) {
   }
@@ -34,7 +33,7 @@ export class BookmarkService {
   addFolder(folderName: string, existingFolder: string) {
     // no folders, just add the first one to the folders object
     if (this.folders.length === 0) {
-      if (existingFolder === undefined) {
+      if (existingFolder === undefined || existingFolder === null || existingFolder === '') {
         this.folders.push(new Folder(folderName, null, null));
       } else {
         this.folders.push(new Folder(existingFolder, [new Folder(folderName, null, null)], null));
@@ -43,7 +42,7 @@ export class BookmarkService {
     }
 
     // process through the high level folders, if one matches add it.
-    if (existingFolder !== undefined && existingFolder !== '') {
+    if (existingFolder !== undefined && existingFolder !== null && existingFolder !== '') {
       for (let i = 0; i < this.folders.length; i += 1) {
         const folder = this.folders[i];
         const foundFolder: Folder = this.findFolder(existingFolder, null, null, folder);
@@ -52,7 +51,6 @@ export class BookmarkService {
           return;
         }
       }
-      return;
     }
 
     // add a new folder where the folder object already has high level entries
@@ -61,39 +59,48 @@ export class BookmarkService {
   }
 
   addBookmark(folderName: string, linkName: string, link: string) {
-    // no folders, just add the first one to the folders object
+    // I have no folders at all.  I'm going to push the first one.
     if (this.folders.length === 0) {
-      if (linkName === null && link === null) {
-        this.folders.push(new Folder(folderName, null, null));
+      if (folderName === undefined || folderName === null || folderName === '') {
+        this.folders.push(new Folder(null, null, [{linkName: linkName, link: link}]));
       } else {
-        this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
+        this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
       }
       return;
     }
 
-    // process through the high level folders, if one matches add it.
-    for (let i = 0; i < this.folders.length; i += 1) {
-      const folder = this.folders[i];
-      if ((folder.folderName === undefined || folder.folderName === null) && folderName === undefined) {
-        this.updateLinks(linkName, link, folder);
-        return;
-      } else {
+    // I have a folder name to add to, go find it and add the link to its link array.
+    if (folderName !== undefined && folderName !== null && folderName !== '') {
+      for (let i = 0; i < this.folders.length; i += 1) {
+        const folder = this.folders[i];
         const foundFolder: Folder = this.findFolder(folderName, linkName, link, folder);
         if (foundFolder !== null) {
           this.updateLinks(linkName, link, foundFolder);
           return;
         }
       }
+      // I have a folder name, but the folder wasn't found in the tree.  Add the folder and the link to that folder.
+      this.folders.push(new Folder(folderName, null, [{linkName: linkName, link: link}]));
+      return;
     }
 
-    // add a new folder where the folder object already has high level entries
-    this.folders.push(new Folder(folderName, null, [{ linkName: linkName, link: link }]));
+    // I don't have a folder name and just want to add the link to an array of links on the top level of the tree
+    for (let i = 0; i < this.folders.length; i += 1) {
+      const folder = this.folders[i];
+      if (folder.folderName === undefined) {
+        this.updateLinks(linkName, link, folder);
+        return;
+      }
+    }
 
+    // I don't have a folder name and just want to add the link to an array of links on the top level of the tree,
+    // but I don't have a no folder name object. Add a new one to the end of the array.
+    this.folders.push(new Folder(null, null, [{linkName: linkName, link: link}]));
   }
 
   saveBookmarks() {
     const request = new HttpRequest('PUT', '/api/saveBookmarks', this.folders, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
       reportProgress: true
     });
     const save = this._http.request<Folder[]>(request)
@@ -106,7 +113,7 @@ export class BookmarkService {
 
   updateLinks(linkName: string, link: string, folder: Folder): Folder {
     if (linkName !== null && link !== null) {
-      const aLink: ILink = { linkName: linkName, link: link };
+      const aLink: ILink = {linkName: linkName, link: link};
       folder.links.push(aLink);
     }
     return folder;

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {BookmarkService} from '../common/BookmarkService';
+import {BookmarkService} from '../common/bookmark.service';
 
 @Component({
   selector: 'app-add-bookmark',

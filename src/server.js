@@ -16,8 +16,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('common'));
 app.use(express.static(__dirname));
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/api/getBookmarks', (req, res) => {
+  const bookmarks = fs.readFileSync(path.join(__dirname, './assets/api/bookmarks/bookmarks.json'), 'utf8');
+  res.json(JSON.parse(bookmarks));
 });
 
 app.put('/api/saveBookmarks', (req, res) => {

@@ -1,4 +1,12 @@
-<li *ngFor="let link of links">
-  <i class="material-icons">link</i>
-  <a href={{link.link}}>{{link.linkName}}</a>
-</li>
+<div *ngIf="isList; else noList">
+  <li *ngFor="let link of links">
+    <i class="material-icons">link</i>
+    <a href={{link.link}}>{{link.linkName}}</a>
+  </li>
+</div>
+<ng-template #noList>
+  <div *ngFor="let link of links">
+    <i class="material-icons">link</i>
+    <a href={{link.link}}>{{link.linkName}}</a>
+  </div>
+</ng-template>

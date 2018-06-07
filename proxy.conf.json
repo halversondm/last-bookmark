@@ -2,5 +2,9 @@
   "/api/saveBookmarks": {
     "target": "http://localhost:9999",
     "secure": false
+  },
+  "/api/getBookmarks": {
+    "target": "http://localhost:9999",
+    "secure": false
   }
 }

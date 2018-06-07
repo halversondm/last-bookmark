@@ -1,14 +1,19 @@
 <ul>
   <li *ngFor="let folder of folders">
-    <div class="click-me" (click)="folder.toggle()">
-      <i class="material-icons">folder</i>
-      <span>{{folder.folderName}}</span>
+    <div *ngIf="folder.folderName === undefined; else hasFolderName">
+      <app-link-item [links]="folder.links" [isList]="false"></app-link-item>
     </div>
-    <div *ngIf="folder.display">
-      <app-folder [folders]="folder.folders"></app-folder>
-      <ul>
-        <app-link-item [links]="folder.links"></app-link-item>
-      </ul>
-    </div>
+    <ng-template #hasFolderName>
+      <div class="click-me" (click)="folder.toggle()">
+        <i class="material-icons">folder</i>
+        <span>{{folder.folderName}}</span>
+      </div>
+      <div *ngIf="folder.display">
+        <app-folder [folders]="folder.folders"></app-folder>
+        <ul>
+          <app-link-item [links]="folder.links" [isList]="true"></app-link-item>
+        </ul>
+      </div>
+    </ng-template>
   </li>
 </ul>

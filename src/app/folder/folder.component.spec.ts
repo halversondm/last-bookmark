@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FolderComponent } from './folder.component';
-import { LinkItemComponent } from '../link-item/link-item.component';
+import {FolderComponent} from './folder.component';
+import {LinkItemComponent} from '../link-item/link-item.component';
 
 describe('FolderComponent', () => {
   let component: FolderComponent;
@@ -9,9 +9,9 @@ describe('FolderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FolderComponent, LinkItemComponent ]
+      declarations: [FolderComponent, LinkItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

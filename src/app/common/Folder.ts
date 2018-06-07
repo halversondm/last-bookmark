@@ -1,4 +1,4 @@
-import { ILink } from './ILink';
+import {ILink} from './ILink';
 
 /**
  * A folder has folders, a folder has links or a folder has links and folders.
@@ -10,6 +10,9 @@ export class Folder {
   display = false;
 
   constructor(folderName: string, folders: Folder[], links: ILink[]) {
+    if (folderName === undefined) {
+      this.display = true;
+    }
     this.folderName = folderName;
     if (folders === undefined || folders === null) {
       this.folders = [];

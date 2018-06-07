@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LinkItemComponent } from './link-item.component';
+import {LinkItemComponent} from './link-item.component';
 
 describe('LinkItemComponent', () => {
   let component: LinkItemComponent;
@@ -8,9 +8,9 @@ describe('LinkItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LinkItemComponent ]
+      declarations: [LinkItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

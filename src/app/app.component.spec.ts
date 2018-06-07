@@ -1,12 +1,12 @@
-import { TestBed, async } from '@angular/core/testing';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule } from '@angular/material';
-import { AppComponent } from './app.component';
-import { BookmarkService } from './common/BookmarkService';
-import { FolderComponent } from './folder/folder.component';
-import { HeaderComponent } from './header/header.component';
-import { LinkItemComponent } from './link-item/link-item.component';
-import { ShowBookmarksComponent } from './show-bookmarks/show-bookmarks.component';
-import { HttpClientModule } from '@angular/common/http';
+import {async, TestBed} from '@angular/core/testing';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {AppComponent} from './app.component';
+import {BookmarkService} from './common/bookmark.service';
+import {FolderComponent} from './folder/folder.component';
+import {HeaderComponent} from './header/header.component';
+import {LinkItemComponent} from './link-item/link-item.component';
+import {ShowBookmarksComponent} from './show-bookmarks/show-bookmarks.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 
 describe('AppComponent', () => {
@@ -17,7 +17,7 @@ describe('AppComponent', () => {
         AppComponent, HeaderComponent, ShowBookmarksComponent, FolderComponent, LinkItemComponent
       ],
       // tslint:disable-next-line:max-line-length
-      imports: [HttpClientModule, MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule]
+      imports: [HttpClientTestingModule, MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule]
     }).compileComponents();
   }));
 

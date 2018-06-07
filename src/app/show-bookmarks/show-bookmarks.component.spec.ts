@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule } from '@angular/material';
-import { ShowBookmarksComponent } from './show-bookmarks.component';
-import { FolderComponent } from '../folder/folder.component';
-import { LinkItemComponent } from '../link-item/link-item.component';
-import { BookmarkService } from '../common/BookmarkService';
-import { HttpClientModule } from '@angular/common/http';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {ShowBookmarksComponent} from './show-bookmarks.component';
+import {FolderComponent} from '../folder/folder.component';
+import {LinkItemComponent} from '../link-item/link-item.component';
+import {BookmarkService} from '../common/bookmark.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('ShowBookmarksComponent', () => {
   let component: ShowBookmarksComponent;
@@ -14,7 +14,7 @@ describe('ShowBookmarksComponent', () => {
     TestBed.configureTestingModule({
       providers: [BookmarkService],
       declarations: [ShowBookmarksComponent, FolderComponent, LinkItemComponent],
-      imports: [HttpClientModule, MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule]
+      imports: [HttpClientTestingModule, MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule]
     })
       .compileComponents();
   }));

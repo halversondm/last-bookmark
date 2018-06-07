@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule} from '@angular/material';
 
-import { HeaderComponent } from './header.component';
+import {HeaderComponent} from './header.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -9,10 +9,10 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ],
+      declarations: [HeaderComponent],
       imports: [MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

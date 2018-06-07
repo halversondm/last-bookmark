@@ -11,7 +11,7 @@ import {ShowBookmarksComponent} from './show-bookmarks/show-bookmarks.component'
 import {FolderComponent} from './folder/folder.component';
 import {LinkItemComponent} from './link-item/link-item.component';
 import {HeaderComponent} from './header/header.component';
-import {BookmarkService} from './common/BookmarkService';
+import {BookmarkService} from './common/bookmark.service';
 import {AddFolderComponent} from './add-folder/add-folder.component';
 
 @NgModule({
@@ -43,4 +43,5 @@ import {AddFolderComponent} from './add-folder/add-folder.component';
   providers: [BookmarkService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

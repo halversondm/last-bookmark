@@ -1,25 +1,31 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {
-  MatButtonModule, MatCardModule, MatDialogModule,
-  MatExpansionModule, MatInputModule, MatToolbarModule, MatDialogRef, MatDialog
+  MatButtonModule,
+  MatCardModule,
+  MatDialog,
+  MatDialogModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatToolbarModule
 } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
-import { AddBookmarkComponent } from './add-bookmark.component';
-import { BookmarkService } from '../common/BookmarkService';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {AddBookmarkComponent} from './add-bookmark.component';
+import {BookmarkService} from '../common/bookmark.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 @NgModule({
   providers: [BookmarkService],
   declarations: [AddBookmarkComponent],
   entryComponents: [AddBookmarkComponent],
   exports: [AddBookmarkComponent],
-  imports: [HttpClientModule, MatButtonModule, MatCardModule,
+  imports: [HttpClientTestingModule, MatButtonModule, MatCardModule,
     MatDialogModule, MatExpansionModule, MatInputModule, MatToolbarModule, FormsModule, BrowserAnimationsModule]
 })
-class AddBookmarkComponentTestModule { }
+class AddBookmarkComponentTestModule {
+}
 
 describe('AddBookmarkComponent', () => {
   let component: AddBookmarkComponent;
