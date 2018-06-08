@@ -22,6 +22,7 @@ describe('Bookmark Service', () => {
     unit.getBookmarks().subscribe(
       (data) => {
         expect(data).toEqual(testData);
+        expect(unit.folders).toEqual(testData);
       },
       (error) => {
         fail();
@@ -30,10 +31,6 @@ describe('Bookmark Service', () => {
     expect(req.request.method).toEqual('GET');
     req.flush(testData);
     httpTestingController.verify();
-  });
-
-  afterEach(() => {
-    console.log('unit.folders = ', JSON.stringify(unit.folders));
   });
 
   it('should add a new folder', () => {

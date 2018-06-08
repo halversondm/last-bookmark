@@ -18,19 +18,13 @@ export class BookmarkService {
   getBookmarks(): Observable<Folder[]> {
     return this._http.get(this._getBookmarksUrl)
       .pipe(
-        map(this.convertToFolder),
+        map(this.convert, this),
+        map(folders => this.folders = folders),
         catchError(this.handleError('getBookmarks', []))
       );
   }
 
-  convertToFolder(response) {
-    console.log(response);
-    const folders = response;
-    this.folders = folders;
-    return folders;
-  }
-
-  addFolder(folderName: string, existingFolder: string) {
+  addFolder(folderName: string, existingFolder: string): void {
     // no folders, just add the first one to the folders object
     if (this.folders.length === 0) {
       if (existingFolder === undefined || existingFolder === null || existingFolder === '') {
@@ -56,6 +50,17 @@ export class BookmarkService {
     // add a new folder where the folder object already has high level entries
     this.folders.push(new Folder(folderName, null, null));
 
+  }
+
+  private convert(folders: Folder[]): Folder[] {
+    if (folders == null) {
+      return null;
+    }
+    for (let i = 0; i < folders.length; i += 1) {
+      const folder = folders[i];
+      folders[i] = new Folder(folder.folderName, this.convert(folder.folders), folder.links);
+    }
+    return folders;
   }
 
   addBookmark(folderName: string, linkName: string, link: string) {

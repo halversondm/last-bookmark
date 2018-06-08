@@ -28,8 +28,9 @@ class AddBookmarkComponentTestModule {
 }
 
 describe('AddBookmarkComponent', () => {
-  let component: AddBookmarkComponent;
+  let unit: AddBookmarkComponent;
   let dialog: MatDialog;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,10 +40,27 @@ describe('AddBookmarkComponent', () => {
     });
     dialog = TestBed.get(MatDialog);
     const dialogRef = dialog.open(AddBookmarkComponent);
-    component = dialogRef.componentInstance;
+    unit = dialogRef.componentInstance;
+  });
+
+  afterEach(() => {
+    unit.close();
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
+    expect(unit).toBeTruthy();
+  });
+
+  it('should add a bookmark', () => {
+    unit.link = 'https://facebook.com';
+    unit.linkName = 'Facebook';
+    unit.folderName = 'Test';
+    unit.add();
+    expect(unit.message).toEqual(unit.SUCCESS);
+  });
+
+  it('will not add a bookmark', () => {
+    unit.add();
+    expect(unit.message).toEqual(unit.FAIL);
   });
 });

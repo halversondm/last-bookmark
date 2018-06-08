@@ -9,6 +9,8 @@ import {BookmarkService} from '../common/bookmark.service';
 })
 export class AddFolderComponent implements OnInit {
 
+  SUCCESS = 'Added!';
+  FAIL = 'You have to provide a Folder Name';
   folderName: string;
   existingFolder: string;
   message: string;
@@ -23,17 +25,15 @@ export class AddFolderComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  add(event): void {
+  add(): void {
     if (this.folderName !== undefined) {
-      console.log(`folder name: ${this.folderName} existing folder: ${this.existingFolder}`);
       this._bookmarkService.addFolder(this.folderName, this.existingFolder);
       this._bookmarkService.saveBookmarks();
-      this.message = 'Added!';
+      this.message = this.SUCCESS;
       setTimeout(() => this.message = '', 1000);
     } else {
-      this.message = 'You have to provide a Folder Name';
+      this.message = this.FAIL;
     }
-    event.preventDefault();
   }
 
 }

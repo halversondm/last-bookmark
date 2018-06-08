@@ -9,6 +9,8 @@ import {BookmarkService} from '../common/bookmark.service';
 })
 export class AddBookmarkComponent implements OnInit {
 
+  SUCCESS = 'Added';
+  FAIL = 'You have to provide a URL and a Name';
   link: string;
   linkName: string;
   folderName: string;
@@ -29,10 +31,10 @@ export class AddBookmarkComponent implements OnInit {
     if (this.link !== undefined && this.linkName !== undefined) {
       this._bookmarkService.addBookmark(this.folderName, this.linkName, this.link);
       this._bookmarkService.saveBookmarks();
-      this.message = 'Added!';
+      this.message = this.SUCCESS;
       setTimeout(() => this.message = '', 1000);
     } else {
-      this.message = 'You have to provide a URL and a Name';
+      this.message = this.FAIL;
     }
   }
 

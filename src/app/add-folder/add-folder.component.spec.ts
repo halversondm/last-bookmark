@@ -28,7 +28,7 @@ class AddFolderComponentTestModule {
 }
 
 describe('AddFolderComponent', () => {
-  let component: AddFolderComponent;
+  let unit: AddFolderComponent;
   let dialog: MatDialog;
 
   beforeEach(() => {
@@ -39,10 +39,26 @@ describe('AddFolderComponent', () => {
     });
     dialog = TestBed.get(MatDialog);
     const dialogRef = dialog.open(AddFolderComponent);
-    component = dialogRef.componentInstance;
+    unit = dialogRef.componentInstance;
+  });
+
+  afterEach(() => {
+    unit.close();
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
+    expect(unit).toBeTruthy();
+  });
+
+  it('should add a folder', () => {
+    unit.existingFolder = 'Test';
+    unit.folderName = 'Test2';
+    unit.add();
+    expect(unit.message).toEqual(unit.SUCCESS);
+  });
+
+  it('will not add a folder', () => {
+    unit.add();
+    expect(unit.message).toEqual(unit.FAIL);
   });
 });
